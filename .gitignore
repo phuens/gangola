@@ -1,3 +1,10 @@
+#src folder: 
+*.DS_Store
+*.expo
+*babel.config.js
+*node_modules
+
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

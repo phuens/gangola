@@ -3,8 +3,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import HomeScreen from './src/screens/HomeScreen';
 import RegisterScreen from './src/screens/RegisterScreen';
-// import AccountScreen from './src/screens/AccountScreen';
-// import HistoryScreen from './src/screens/HistoryScreen';
+import ProductScreen from './src/screens/ProductScreen';
 import { createStackNavigator } from '@react-navigation/stack';
 
 const Stack = createStackNavigator();
@@ -18,6 +17,11 @@ const App = () => {
                     name="Register"
                     component={RegisterScreen}
                     options={{ title: 'Register' }}
+                />
+                <Stack.Screen
+                    name="Product"
+                    component={ProductScreen}
+                    options={{ title: 'Product' }}
                 />
             </Stack.Navigator>
         </NavigationContainer>

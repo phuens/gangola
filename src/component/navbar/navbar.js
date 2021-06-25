@@ -1,21 +1,14 @@
 import React, { Component } from 'react';
 import { Text, StyleSheet, View, Button } from 'react-native';
-import { IconButton, Colors } from 'react-native-paper';
+import { IconButton } from 'react-native-paper';
 
-export default class Navbar extends Component {
-    render() {
-        return (
-            <View style={styles.container}>
-                <IconButton
-                    icon="menu"
-                    color="#FFF"
-                    size={30}
-                    onPress={() => console.log('karma ass')}
-                />
-            </View>
-        );
-    }
-}
+const Navbar = ({ drawerShow }) => {
+    return (
+        <View style={styles.container}>
+            <IconButton icon="menu" color="#FFF" size={30} onPress={() => drawerShow()} />
+        </View>
+    );
+};
 
 const styles = StyleSheet.create({
     container: {
@@ -25,3 +18,5 @@ const styles = StyleSheet.create({
         paddingLeft: 10,
     },
 });
+
+export default Navbar;

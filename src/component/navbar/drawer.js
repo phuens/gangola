@@ -5,16 +5,6 @@ import { IconButton, Colors } from 'react-native-paper';
 const Drawer = ({ navigation }) => {
     return (
         <View style={styles.container}>
-            <View>
-                <Text style={styles.menu}>Menu</Text>
-                <IconButton
-                    icon="menu"
-                    color="#FFF"
-                    size={30}
-                    onPress={() => console.log('karma ass')}
-                />
-            </View>
-            <View></View>
             <View style={styles.sub_menu}>
                 <Button title="Sell" onPress={() => navigation.navigate('Register')} />
             </View>
@@ -27,25 +17,27 @@ const Drawer = ({ navigation }) => {
 
 const styles = StyleSheet.create({
     container: {
-        height: '100%',
         backgroundColor: '#fff',
         position: 'absolute',
+        // height: '100%',
         width: 200,
-        borderRightColor: '#000',
+        // borderRightColor: '#000',
         borderWidth: 1,
     },
-    icon_container: {
-        paddingLeft: 10,
+    header: {
+        flex: 1,
+        flexDirection: 'row',
+        backgroundColor: '#49c1a4',
+        justifyContent: 'space-between',
     },
     menu: {
         fontSize: 20,
-        backgroundColor: '#49c1a4',
-        padding: 11,
+        padding: 15,
         color: '#FFF',
     },
     sub_menu: {
         alignSelf: 'flex-start',
-        paddingLeft: 5,
+        paddingLeft: 10,
     },
 });
 

@@ -9,6 +9,7 @@ const Tab = createBottomTabNavigator();
 
 const App = ()=>{
   return (
+
     <NavigationContainer > 
       <Tab.Navigator tabBarOptions={{
         style:{

@@ -2,29 +2,26 @@ import * as React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import HomeScreen from './src/screens/HomeScreen';
-import AccountScreen from './src/screens/AccountScreen';
-import HistoryScreen from './src/screens/HistoryScreen'
+import RegisterScreen from './src/screens/RegisterScreen';
+// import AccountScreen from './src/screens/AccountScreen';
+// import HistoryScreen from './src/screens/HistoryScreen';
+import { createStackNavigator } from '@react-navigation/stack';
 
-const Tab = createBottomTabNavigator();
+const Stack = createStackNavigator();
 
-const App = ()=>{
-  return (
+const App = () => {
+    return (
+        <NavigationContainer>
+            <Stack.Navigator>
+                <Stack.Screen name="Home" component={HomeScreen} options={{ title: 'Home' }} />
+                <Stack.Screen
+                    name="Register"
+                    component={RegisterScreen}
+                    options={{ title: 'Register' }}
+                />
+            </Stack.Navigator>
+        </NavigationContainer>
+    );
+};
 
-    <NavigationContainer > 
-      <Tab.Navigator tabBarOptions={{
-        style:{
-          backgroundColor:'#49c1a4',
-          activeTintColor: 'black',
-          inactiveTintColor: 'white',
-        }
-      }}>
-        <Tab.Screen name="Home" component={HomeScreen}/>
-        <Tab.Screen name="Account" component={AccountScreen} />
-        <Tab.Screen name="History" component={HistoryScreen} />
-      </Tab.Navigator>
-    </NavigationContainer>
-  );
-}
-
-
-export default App
+export default App;

@@ -1,8 +1,15 @@
-import React from "react";
-import { Text, StyleSheet } from "react-native";
+import React, { useEffect, useState } from "react";
+import { Text, StyleSheet, TextInput, View} from "react-native";
 
 const RegisterScreen = () => {
-  return <Text style={styles.text}>RegisterScreen</Text>;
+  const { name, setName} = useState('')
+  const onChangeHandler = (e)=>{
+
+  }
+  return (<View>
+    <TextInput onChange>
+    </TextInput>
+  </View>)
 };
 
 const styles = StyleSheet.create({

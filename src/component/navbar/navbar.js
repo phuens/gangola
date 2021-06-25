@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Text, StyleSheet, View, Button } from 'react-native';
-import { IconButton, Colors } from 'react-native-paper';
+// import { IconButton, Colors } from 'react-native-paper';
 
 export default class Navbar extends Component {
     render() {

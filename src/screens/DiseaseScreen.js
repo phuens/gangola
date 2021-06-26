@@ -2,7 +2,9 @@ import React, { useEffect, useState } from "react";
 import { Text, DiseaseStyleheet, TouchableOpacity, View, Alert,ImageBackground } from "react-native";
 import {Camera} from 'expo-camera'
 import DiseaseStyle from "./DiseaseStyle";
-import { PostDisease } from "../api/Api";
+// import { getImages } from '../component/navbar/commonActions'
+import ImagePicker from 'react-native-customized-image-picker';
+
 
 const DiseaseScreen = ({navigation}) => {
   const [hasPermission, setHasPermission] = useState(null);
@@ -10,25 +12,16 @@ const DiseaseScreen = ({navigation}) => {
   const [capturedImage, setCapturedImage] = useState('')
   const [type, setType] = useState(Camera.Constants.Type.back);
   let camera =''
-  
+
+  const getSiteDocuments = async () => {
+    const images = await getImages();
+    setapproval_document(images);
+  };
+
   const Pitcure = ()=>{
-    return (
-      <React.Fragment>
-        <Camera style={DiseaseStyle.camera} type={type}
+    return (<React.Fragment>
+            <Camera style={DiseaseStyle.camera} type={type}
                 ref={(r)=>camera = r}>
-                {/* <View style={DiseaseStyle.buttonContainer}> */}
-                  {/* <TouchableOpacity
-                    style={DiseaseStyle.button}
-                    onPress={() => {
-                      setType(
-                        type === Camera.Constants.Type.back
-                          ? Camera.Constants.Type.front
-                          : Camera.Constants.Type.back
-                      );
-                    }}>
-                    <Text style={DiseaseStyle.text}> Flip </Text>
-                  </TouchableOpacity> */}
-                {/* </View> */}
                 <View
                 style={DiseaseStyle.capture}
               >
@@ -42,13 +35,10 @@ const DiseaseScreen = ({navigation}) => {
                     style={DiseaseStyle.takePiectureBtn}
                     />
                 </View>
-      </React.Fragment>)
-        
-  }
-  // const PostValue = ()=>{
-  //   console.log('image details : ',capturedImage)
-  //   PostDisease(capturedImage)
-  // }
+      </React.Fragment>
+      )
+    } 
+  
   const CameraPreview = ({photo, retakePicture, savePhoto}) => {
     return (
       <View
@@ -99,7 +89,17 @@ const DiseaseScreen = ({navigation}) => {
   const __takePicture = async () => {
     try{
       if (!camera) return
-      const photo = await camera.takePictureAsync()
+      const photo = await camera.takePictureAsync({
+        includeBase64: true,
+        isCamera: true,
+        forceJpg: true,
+        compressQuality: 50,
+        width: 300,
+        height: 300,
+        minCompressSize: 8000, //6 MB
+        title: 'image',
+      })
+      console.log(photo)
       setPreviewVisible(true)
       setCapturedImage(photo)
     }catch(err){

@@ -8,15 +8,15 @@ const ResultScreen = ({route})=>{
        PostDisease()
     },[])
     const PostDisease =  async()=>{
-        const data = new FormData()
-        data.append('farmer','111223342313')
-        data.append('crop','Onions')
-        data.append('crop_image',route.params.capturedImage.uri.replace('file://',''))
-        const headers= {
-            'Content-Type': 'multipart/form-data;'
-          }
-        console.log('response :',data)
-        res = await axios.post('http://wccl.erp.bt/api/method/gangola.api.submit_image',data,headers)
+        // const data = new FormData()
+        // data.append('farmer','111223342313')
+        // data.append('crop','Onions')
+        // data.append('crop_image',route.params.capturedImage.uri.replace('file://',''))
+        // const headers= {
+        //     'Content-Type': 'multipart/form-data;'
+        //   }
+        console.log('response :',route.params.capturedImage.uri)
+        // res = await axios.post('http://wccl.erp.bt/api/method/gangola.api.submit_image',data,headers)
     }
     return (<View style={{
         flex:1

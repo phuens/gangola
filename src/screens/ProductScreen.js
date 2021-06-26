@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Text, StyleSheet, TextInput, View, Button, Collapsible } from 'react-native';
-import { Picker } from '@react-native-picker/picker';
-import DatePicker from 'react-native-date-picker';
+// import { Picker } from '@react-native-picker/picker';
+// import DatePicker from 'react-native-date-picker';
 import axios from 'axios';
 import { ScrollView } from 'react-native-gesture-handler';
 
@@ -46,9 +46,9 @@ const RegisterScreen = ({ route, navigation }) => {
                 <View>
                     <Text> Location </Text>
                 </View>
-                <View style={{ padding: 0, margin: 0 }}>
+                {/* <View style={{ padding: 0, margin: 0 }}>
                     <Button title="Search" onPress={() => navigation.navigate('Register')} />
-                </View>
+                </View> */}
             </View>
 
             <View
@@ -74,7 +74,7 @@ const RegisterScreen = ({ route, navigation }) => {
                     <Text style={{ fontWeight: 'bold', color: '#0275d8' }}>Quantity</Text>
                 </View>
                 <View>
-                    <Text style={{ fontWeight: 'bold', color: '#0275d8' }}>Rate (Nu)</Text>
+                    <Text style={{ fontWeight: 'bold', color: '#0275d8' }}>Rate (Per Kg)</Text>
                 </View>
             </View>
             <View
@@ -102,10 +102,7 @@ const RegisterScreen = ({ route, navigation }) => {
                             <Text>{value.quantity}</Text>
                         </View>
                         <View>
-                            <Text>
-                                {value.rate} per {value.uom}
-                                ->
-                            </Text>
+                            <Text>Nu. {value.rate}</Text>
                         </View>
                     </View>
                     <View

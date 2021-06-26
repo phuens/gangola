@@ -31,17 +31,17 @@ const HomeScreen = ({ navigation }) => {
     return (
         <ScrollView>
             <Navbar drawerShow={drawerShow} />
-            <View styl={styles.drawer}>
-                {showDrawer ? (
-                    <View>
-                        <Drawer navigation={navigation} />
-                    </View>
-                ) : (
-                    <View>
-                        <Text></Text>
-                    </View>
-                )}
-            </View>
+
+            {showDrawer ? (
+                <View>
+                    <Drawer navigation={navigation} />
+                </View>
+            ) : (
+                <View>
+                    <Text></Text>
+                </View>
+            )}
+
             {productsList.map((value, index) => (
                 <View
                     style={{

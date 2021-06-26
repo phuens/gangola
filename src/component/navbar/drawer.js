@@ -1,51 +1,116 @@
 import React, { Component } from 'react';
 import { Text, StyleSheet, View, Button } from 'react-native';
 import { IconButton, Colors } from 'react-native-paper';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 const Drawer = ({ navigation }) => {
     return (
         <View style={styles.container}>
-            <View>
-                <Text style={styles.menu}>Menu</Text>
-                <IconButton
-                    icon="menu"
-                    color="#FFF"
-                    size={30}
-                    onPress={() => console.log('karma ass')}
-                />
+            <View
+                style={{
+                    backgroundColor: '#49c1a4',
+                    borderWidth: 1,
+                    borderColor: '#f7f7f1',
+                    height: 50,
+                    justifyContent: 'center',
+                }}
+            >
+                <Text style={{ paddingLeft: 10, fontSize: 25, color: '#FFF' }}>Menu</Text>
             </View>
-            <View></View>
+            <View style={styles.sub_menu_1}>
+                <TouchableOpacity
+                    style={{ flexDirection: 'row' }}
+                    onPress={() => navigation.navigate('Register')}
+                >
+                    <IconButton
+                        icon="storefront"
+                        color="#0275d8"
+                        size={20}
+                        onPress={() => drawerShow()}
+                    />
+                    <Text style={styles.touch_button}>Sell</Text>
+                </TouchableOpacity>
+            </View>
+            <View
+                style={{ width: '100%', height: 2, backgroundColor: '#f7f7f1', marginBottom: 13 }}
+            />
             <View style={styles.sub_menu}>
-                <Button title="Sell" onPress={() => navigation.navigate('Register')} />
+                <TouchableOpacity
+                    style={{ flexDirection: 'row' }}
+                    onPress={() => navigation.navigate('Disease')}
+                >
+                    <IconButton
+                        icon="leaf"
+                        color="#0275d8"
+                        size={20}
+                        onPress={() => drawerShow()}
+                    />
+                    <Text style={styles.touch_button}>Crop+</Text>
+                </TouchableOpacity>
             </View>
+            <View
+                style={{ width: '100%', height: 2, backgroundColor: '#f7f7f1', marginBottom: 13 }}
+            />
             <View style={styles.sub_menu}>
-                <Button title="Crop Maintenance" onPress={() => navigation.navigate('Register')} />
+                <TouchableOpacity
+                    style={{ flexDirection: 'row' }}
+                    onPress={() => navigation.navigate('Disease')}
+                >
+                    <IconButton
+                        icon="chart-bar"
+                        color="#0275d8"
+                        size={20}
+                        onPress={() => drawerShow()}
+                    />
+                    <Text style={styles.touch_button}>Dashboard</Text>
+                </TouchableOpacity>
             </View>
+            <View
+                style={{ width: '100%', height: 2, backgroundColor: '#f7f7f1', marginBottom: 13 }}
+            />
+            <View style={styles.sub_menu}>
+                <TouchableOpacity
+                    style={{ flexDirection: 'row' }}
+                    onPress={() => navigation.navigate('Register')}
+                >
+                    <IconButton
+                        icon="weather-partly-cloudy"
+                        color="#0275d8"
+                        size={20}
+                        onPress={() => drawerShow()}
+                    />
+                    <Text style={styles.touch_button}>Weather</Text>
+                </TouchableOpacity>
+            </View>
+            <View
+                style={{ width: '100%', height: 2, backgroundColor: '#f7f7f1', marginBottom: 20 }}
+            />
         </View>
     );
 };
 
 const styles = StyleSheet.create({
     container: {
-        height: '100%',
         backgroundColor: '#fff',
-        position: 'absolute',
+        height: '100%',
         width: 200,
-        borderRightColor: '#000',
-        borderWidth: 1,
+        zIndex: 3,
     },
-    icon_container: {
+
+    sub_menu_1: {
+        alignSelf: 'flex-start',
         paddingLeft: 10,
-    },
-    menu: {
-        fontSize: 20,
-        backgroundColor: '#49c1a4',
-        padding: 11,
-        color: '#FFF',
+        marginTop: 10,
     },
     sub_menu: {
         alignSelf: 'flex-start',
-        paddingLeft: 5,
+        paddingLeft: 10,
+    },
+    touch_button: {
+        fontSize: 20,
+        paddingLeft: 3,
+        paddingTop: 10,
+        color: '#0275d8',
     },
 });
 

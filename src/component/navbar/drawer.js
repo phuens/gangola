@@ -37,7 +37,7 @@ const Drawer = ({ navigation }) => {
             <View style={styles.sub_menu}>
                 <TouchableOpacity
                     style={{ flexDirection: 'row' }}
-                    onPress={() => navigation.navigate('Register')}
+                    onPress={() => navigation.navigate('Disease')}
                 >
                     <IconButton
                         icon="leaf"
@@ -54,7 +54,7 @@ const Drawer = ({ navigation }) => {
             <View style={styles.sub_menu}>
                 <TouchableOpacity
                     style={{ flexDirection: 'row' }}
-                    onPress={() => navigation.navigate('Register')}
+                    onPress={() => navigation.navigate('Disease')}
                 >
                     <IconButton
                         icon="chart-bar"

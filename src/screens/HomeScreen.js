@@ -26,7 +26,6 @@ const HomeScreen = ({ navigation }) => {
             params: { as_on_date: '' },
         });
         setProductsList(data.data.message);
-        console.log('asdasdasd');
         console.log(data.data.message);
     };
     return (
@@ -87,7 +86,9 @@ const HomeScreen = ({ navigation }) => {
                             color="#49c1a3"
                             size={30}
                             style={{ paddingTop: 5 }}
-                            onPress={() => navigation.navigate('Product')}
+                            onPress={() =>
+                                navigation.navigate('Product', { crop_name: value.crop })
+                            }
                         />
                     </TouchableOpacity>
                 </View>

@@ -3,6 +3,7 @@ import { StyleSheet, TextInput, ScrollView, View, Picker, Alert, Image, Text, Bu
 // import LogIn from 'LogInScreen';
 import axios from 'axios'
 import * as ImagePicker from 'expo-image-picker';
+import { LinearGradient } from 'expo-linear-gradient';
 
 const RegisterScreen = ({ navigation }) => {
   const[name, setName] = useState("");
@@ -71,7 +72,18 @@ const RegisterScreen = ({ navigation }) => {
     response = await axiox.post("", {params: {name:name, pN:phoneNumber, d:dzongkhag, g:gewog, v:village}})
   }
   return (
+    <LinearGradient 
+    colors={['white', '#49c1a4']} 
+    start={{
+      x: 0,
+      y: 0
+    }}
+    end={{
+      x: 1,
+      y: 3
+    }}>
    <ScrollView style={{padding:10}}>
+
      <TextInput onChangeText = {sendNameValue} placeholder={"Name"} style={styles.inputText} value={name}></TextInput>
      <TextInput onChangeText={sendPhoneNumberValue} placeholder={"Phone Number"} style={styles.inputText} value={phoneNumber} keyboardType='numeric'></TextInput>
      <View style={styles.picker}>    
@@ -154,6 +166,7 @@ const RegisterScreen = ({ navigation }) => {
       <View>{image && <Image source={{ uri: image }} style={styles.image} />}</View>
       <Text style={styles.text} onPress={() => navigation.navigate('LogIn')}>Already Have An Account? Log In</Text>
    </ScrollView> 
+   </LinearGradient> 
    
   )
 };
@@ -173,7 +186,7 @@ const styles = StyleSheet.create({
     marginLeft: 5,
     marginRight: 5,
     marginTop: 15,
-    marginBottom:50,
+    marginBottom:'55%',
     textAlign: "center"
   },
   button: {
@@ -187,7 +200,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     borderRadius: 30,
     borderColor:'#49c1a4',
-    borderWidth:1
+    borderWidth: 2
   },
   inputText: {
     fontSize:16,

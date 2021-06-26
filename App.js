@@ -3,6 +3,9 @@ import { NavigationContainer } from '@react-navigation/native';
 import HomeScreen from './src/screens/HomeScreen';
 import DiseaseScreen from './src/screens/DiseaseScreen';
 import RegisterScreen from './src/screens/RegisterScreen';
+import LogInScreen from './src/screens/LogInScreen';
+// import AccountScreen from './src/screens/AccountScreen';
+// import HistoryScreen from './src/screens/HistoryScreen';
 import ProductScreen from './src/screens/ProductScreen';
 import { createStackNavigator } from '@react-navigation/stack';
 import ResultScreen from './src/screens/ResultScreen';
@@ -24,6 +27,11 @@ const App = () => {
                     component={RegisterScreen}
                     options={{ title: 'Register' }}
                 />
+                <Stack.Screen
+                    name="LogIn"
+                    component={LogInScreen}
+                    options={{ title: 'Log In' }}
+                    />
                 <Stack.Screen
                     name="Product"
                     component={ProductScreen}

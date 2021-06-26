@@ -4,52 +4,26 @@ import { Text, StyleSheet, TextInput, View, Button, Picker, Alert } from "react-
 import axios from 'axios'
 
 const LogInScreen = ({ navigation }) => {
-  const[name, setName] = useState("");
   const[phoneNumber, setNumber] = useState("");
   const[password, setPassword] = useState("");
-  const [dzongkhagList, setDzongkhagList] = useState([]);
-  const [dzongkhag, setDzongkhag] = useState("");
-  const [gewogList, setGewogList] = useState([]);
-  const [gewog, setGewog] = useState("");
-  const [villageList, setVillageList] = useState([]);
-  const [village, setVillage] = useState("");
-  function sendNameValue(value) {
-    setName(value)
-  };
   function sendPhoneNumberValue(value) {
     setNumber(value)
   };
-  useEffect( ()=>{
-    getDzongkhagList()
-  },[]);
-  const getDzongkhagList = async() => {
-    data = await axios.get("http://wccl.erp.bt/api/method/gangola.api.get_dzongkhags")
-    setDzongkhagList(data.data.message)
-  }
-  const getGewogs = async (v)=>{
-    data = await axios.get(" http://wccl.erp.bt/api/method/gangola.api.get_gewogs",{params:{dzongkhag:v}})
-    setGewogList(data.data.message)
-    setVillage("")
-  }
-  const getVillages = async (v)=>{
-    data = await axios.get("http://wccl.erp.bt/api/method/gangola.api.get_villages",{params:{dzongkhag:dzongkhag, gewog:v}})
-    setVillageList(data.data.message)
-  }
-  const logIn = async (n, pw)=>{
-    if (!n.trim()){
-      return Alert.alert('Missing Field','Name is mandatory.');
+  const logIn = async (pN, pW)=>{
+    if (!pN.trim()){
+      return Alert.alert('Missing Field','Phone Number is mandatory.');
     }
-    if (!pw.trim()){
+    if (!pW.trim()){
       return Alert.alert('Missing Field','Password is mandatory.');
     }
     response = await axiox.post("", {params: {name:name, pN:phoneNumber, d:dzongkhag, g:gewog, v:village}})
   }
   return (
-   <View>
-     <TextInput onChangeText = {sendNameValue} placeholder={"Name"} value={name}></TextInput>
-     <TextInput onChangeText={setPassword} secureTextEntry={true} style={styles.default} value={password} placeholder={"Password"} />
-     <Button title="Log In" onPress={() => logIn(name, password)} />
-     <Text onPress={() => navigation.navigate('Register')}>Don't Have An Account? Register</Text>
+   <View style={{padding:10}}>
+     <TextInput onChangeText={sendPhoneNumberValue} style={styles.inputText}  placeholder={"Phone Number"} value={phoneNumber} keyboardType='numeric'></TextInput>
+     <TextInput onChangeText={setPassword} style={styles.inputText} secureTextEntry={true} value={password} placeholder={"Password"} />
+     <View style={styles.button}><Button title="Log In" style={{borderRadius: 30}} color='#49c1a4' onPress={() => logIn(phoneNumber, password)} /></View>
+     <Text style={styles.text} onPress={() => navigation.navigate('Register')}>Don't Have An Account? Register</Text>
    </View> 
    
   )
@@ -57,8 +31,30 @@ const LogInScreen = ({ navigation }) => {
 
 const styles = StyleSheet.create({
   text: {
-    fontSize: 30
-  }
+    fontSize: 12,
+    marginLeft: 5,
+    marginRight: 5,
+    marginTop: 15,
+    textAlign: "center",
+    padding: 5
+  },
+  button: {
+    marginLeft: 5,
+    marginRight: 5,
+    marginTop: 35,
+    // borderRadius: 30
+  },
+  inputText: {
+    borderColor: '#49c1a4',
+    borderWidth: 2,
+    paddingTop: 10,
+    marginLeft: 5,
+    marginRight: 5,
+    marginTop: 15,
+    padding:10,
+    borderRadius: 30
+
+  },
 });
 
 export default LogInScreen;

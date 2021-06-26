@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Text, StyleSheet, TextInput, View, Button } from 'react-native';
+import { Text, StyleSheet, TextInput, View, Button, Collapsible } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 import DatePicker from 'react-native-date-picker';
 import axios from 'axios';
@@ -15,9 +15,8 @@ const RegisterScreen = ({ route, navigation }) => {
     }, []);
 
     const getFarmerData = async () => {
-        console.log('right before farmer data');
         let data = await axios.get('http://wccl.erp.bt/api/method/gangola.api.get_farmers', {
-            params: { as_on_date: '', crop: 'Garlic' },
+            params: { as_on_date: '', crop: route.params.crop_name },
         });
         setfarmerList(data.data.message);
         console.log('-----------------');
@@ -51,11 +50,44 @@ const RegisterScreen = ({ route, navigation }) => {
                     <Button title="Search" onPress={() => navigation.navigate('Register')} />
                 </View>
             </View>
-            {/* <View
-                style={{ width: '100%', height: 1, backgroundColor: '#b9b9b999', marginBottom: 20 }}
-            /> */}
-            {farmerList.map((value, index) => (
+
+            <View
+                style={{
+                    width: '100%',
+                    height: 1,
+                    backgroundColor: '#b9b9b999',
+                    marginBottom: 10,
+                    marginTop: 10,
+                }}
+            />
+            <View
+                style={{
+                    flexDirection: 'row',
+                    justifyContent: 'space-between',
+                    textAign: 'left',
+                }}
+            >
                 <View>
+                    <Text style={{ fontWeight: 'bold', color: '#0275d8' }}>Farmer</Text>
+                </View>
+                <View>
+                    <Text style={{ fontWeight: 'bold', color: '#0275d8' }}>Quantity</Text>
+                </View>
+                <View>
+                    <Text style={{ fontWeight: 'bold', color: '#0275d8' }}>Rate (Nu)</Text>
+                </View>
+            </View>
+            <View
+                style={{
+                    width: '100%',
+                    height: 1,
+                    backgroundColor: '#b9b9b999',
+                    marginBottom: 20,
+                    marginTop: 10,
+                }}
+            />
+            {farmerList.map((value, index) => (
+                <View key={value + index}>
                     <View
                         style={{
                             flexDirection: 'row',
@@ -72,6 +104,7 @@ const RegisterScreen = ({ route, navigation }) => {
                         <View>
                             <Text>
                                 {value.rate} per {value.uom}
+                                ->
                             </Text>
                         </View>
                     </View>
@@ -84,6 +117,15 @@ const RegisterScreen = ({ route, navigation }) => {
                             marginTop: 10,
                         }}
                     />
+                    {/* <View>
+                        <Collapsible collapsed={true} align="center">
+                            <View style={styles.content}>
+                                <Text style={{ textAlign: 'center' }}>
+                                    This is a dummy text of Single Collapsible View
+                                </Text>
+                            </View>
+                        </Collapsible>
+                    </View> */}
                 </View>
             ))}
         </ScrollView>

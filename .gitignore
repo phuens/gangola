@@ -3,6 +3,7 @@
 *.expo
 *babel.config.js
 *node_modules
+package_lock.json
 
 
 # Byte-compiled / optimized / DLL files

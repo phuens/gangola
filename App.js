@@ -6,6 +6,7 @@ import RegisterScreen from './src/screens/RegisterScreen';
 import LogInScreen from './src/screens/LogInScreen';
 import DashboardScreen from './src/screens/DashboardScreen';
 import WeatherScreen from './src/screens/WeatherScreen';
+import IndividualProductScreen from './src/screens/IndividualProductScreen';
 import ProductScreen from './src/screens/ProductScreen';
 import { createStackNavigator } from '@react-navigation/stack';
 import ResultScreen from './src/screens/ResultScreen';
@@ -47,6 +48,11 @@ const App = () => {
                     name="Weather"
                     component={WeatherScreen}
                     options={{ title: 'Weather' }}
+                />
+                <Stack.Screen
+                    name="Crop"
+                    component={IndividualProductScreen}
+                    options={{ title: 'Crop' }}
                 />
             </Stack.Navigator>
         </NavigationContainer>

@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Text, StyleSheet, TextInput, View, Button, Collapsible, TouchableOpacity, Picker } from 'react-native';
+import { Text, StyleSheet, TextInput, View, Button, Collapsible, TouchableOpacity, Picker, LogBox, YellowBox } from 'react-native';
 // import { Picker } from '@react-native-picker/picker';
 // import DatePicker from 'react-native-date-picker';
+LogBox.ignoreAllLogs = ["Warning: Each", "Warning: Failed"];
+YellowBox.ignoreWarnings([""]);
 import axios from 'axios';
 import { ScrollView } from 'react-native-gesture-handler';
 

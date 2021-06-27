@@ -10,6 +10,7 @@ import ProductScreen from './src/screens/ProductScreen';
 import { createStackNavigator } from '@react-navigation/stack';
 import ResultScreen from './src/screens/ResultScreen';
 import SellScreen from './src/screens/SellScreen';
+import IndividualProductScreen from './src/screens/IndividualProductScreen';
 
 const Stack = createStackNavigator();
 
@@ -53,6 +54,11 @@ const App = () => {
                     name="Sell"
                     component={SellScreen}
                     options={{ title: 'Sell' }}
+                />
+                <Stack.Screen
+                    name="Crop"
+                    component={IndividualProductScreen}
+                    options={{ title: 'Crop' }}
                 />
             </Stack.Navigator>
         </NavigationContainer>

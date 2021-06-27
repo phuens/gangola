@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Text, StyleSheet, TextInput, View, Button, Collapsible } from 'react-native';
+import { Text, StyleSheet, TextInput, View, Button, Collapsible, TouchableOpacity, Picker } from 'react-native';
 // import { Picker } from '@react-native-picker/picker';
 // import DatePicker from 'react-native-date-picker';
 import axios from 'axios';
@@ -7,23 +7,52 @@ import { ScrollView } from 'react-native-gesture-handler';
 
 const RegisterScreen = ({ route, navigation }) => {
     const [date, setDate] = useState(new Date());
-    const [dzongkhag, setDzongkhag] = useState('');
     const [farmerList, setfarmerList] = useState([]);
-
+    const [dzongkhagList, setDzongkhagList] = useState([]);
+    const [dzongkhag, setDzongkhag] = useState("");
     useEffect(() => {
         getFarmerData();
+        getDzongkhagList();
     }, []);
+    const getDzongkhagList = async() => {
+        data = await axios.get("http://wccl.erp.bt/api/method/gangola.api.get_dzongkhags")
+        setDzongkhagList(data.data.message)
+      }
 
     const getFarmerData = async () => {
         let data = await axios.get('http://wccl.erp.bt/api/method/gangola.api.get_farmers', {
             params: { as_on_date: '', crop: route.params.crop_name },
         });
         setfarmerList(data.data.message);
-        console.log('-----------------');
-        console.log(data.data.message[0].ason_date);
+        // console.log('-----------------');
+        console.log(data.data.message);
     };
+    const filterByDate = async() => {
+        let data = await axios.get('http://wccl.erp.bt/api/method/gangola.api.get_farmers', {
+            params: { as_on_date: '', crop: route.params.crop_name },
+        })
+        data.data.message.sort((a,b) => new Date(a.as_on_date).getTime() - new Date(b.as_on_date).getTime());
+        setfarmerList(data.data.message);
+        // console.log(data.data.message)
+    }
+    const filterByDzongkhag = async(v) => {
+        console.log(v)
+        setDzongkhag(v)
+        let data = await axios.get('http://wccl.erp.bt/api/method/gangola.api.get_farmers', {
+            params: { as_on_date: '', crop: route.params.crop_name },
+        })
+        if(v!==undefined){
+            const filtered = data.data.message.filter((x) => x.dzongkhag === v);
+            setfarmerList(filtered);
+        }
+        else{
+            setfarmerList(data.data.message);
+        }
+        console.log(filtered)
+    }
     return (
         <ScrollView style={styles.container}>
+            {/* <Text>Filter By Location</Text> */}
             <Text style={styles.crop_name}>{route.params.crop_name}</Text>
             {/* <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                 <View style={{ flex: 1, height: 1, backgroundColor: 'black' }} />
@@ -39,13 +68,33 @@ const RegisterScreen = ({ route, navigation }) => {
             <View
                 style={{ width: '100%', height: 2, backgroundColor: '#49c1a4', marginBottom: 20 }}
             />
-            <View style={{ flexDirection: 'row' }}>
-                <View>
-                    <Text> Date </Text>
-                </View>
-                <View>
-                    <Text> Location </Text>
-                </View>
+            <View>
+                {/* <TouchableOpacity onPress={filterByDate}>
+                    <View style={styles.button}>
+                         <Text style={{ color: '#49c1a4', }}>Date</Text>
+                    </View>
+                </TouchableOpacity> */}
+                <Picker
+                    mode="dropdown"
+                    itemStyle={{height:50}}
+                    selectedValue={dzongkhag}
+                    onValueChange={(val) => {filterByDzongkhag(val)}}>
+                    <Picker.Item
+                      label={'Filter By Dzongkhag'}
+                      value={undefined}
+                      key={-1}
+                    />
+                    {dzongkhagList &&
+                      dzongkhagList.map((pur, idx) => {
+                        return (
+                          <Picker.Item
+                            label={pur.name}
+                            value={pur.name}
+                            key={idx}
+                          />
+                        );
+                      })}
+                </Picker>
                 {/* <View style={{ padding: 0, margin: 0 }}>
                     <Button title="Search" onPress={() => navigation.navigate('Register')} />
                 </View> */}

@@ -4,6 +4,8 @@ import HomeScreen from './src/screens/HomeScreen';
 import DiseaseScreen from './src/screens/DiseaseScreen';
 import RegisterScreen from './src/screens/RegisterScreen';
 import LogInScreen from './src/screens/LogInScreen';
+import DashboardScreen from './src/screens/DashboardScreen';
+import WeatherScreen from './src/screens/WeatherScreen';
 import ProductScreen from './src/screens/ProductScreen';
 import { createStackNavigator } from '@react-navigation/stack';
 import ResultScreen from './src/screens/ResultScreen';
@@ -26,11 +28,7 @@ const App = () => {
                     component={RegisterScreen}
                     options={{ title: 'Register' }}
                 />
-                <Stack.Screen
-                    name="LogIn"
-                    component={LogInScreen}
-                    options={{ title: 'Log In' }}
-                    />
+                <Stack.Screen name="LogIn" component={LogInScreen} options={{ title: 'Log In' }} />
                 <Stack.Screen
                     name="Product"
                     component={ProductScreen}
@@ -41,10 +39,15 @@ const App = () => {
                     component={ResultScreen}
                     options={{ title: 'Result' }}
                 />
-                 <Stack.Screen
-                    name="SellScreen"
-                    component={SellScreen}
-                    options={{ title: 'Sell Screen' }}
+                <Stack.Screen
+                    name="Dashboard"
+                    component={DashboardScreen}
+                    options={{ title: 'Dashboard' }}
+                />
+                <Stack.Screen
+                    name="Weather"
+                    component={WeatherScreen}
+                    options={{ title: 'Weather' }}
                 />
             </Stack.Navigator>
         </NavigationContainer>

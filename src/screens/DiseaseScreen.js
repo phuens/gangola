@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Dimensions } from 'react-native';
 import {
     Text,
     DiseaseStyleheet,
@@ -9,6 +10,7 @@ import {
 } from 'react-native';
 import { Camera } from 'expo-camera';
 import DiseaseStyle from './DiseaseStyle';
+import { IconButton } from 'react-native-paper';
 
 const DiseaseScreen = ({ navigation }) => {
     const [hasPermission, setHasPermission] = useState(null);
@@ -23,33 +25,24 @@ const DiseaseScreen = ({ navigation }) => {
         setapproval_document(images);
     };
 
-    const Pitcure = () => {
-        return (
-            <React.Fragment>
-                <Camera style={DiseaseStyle.camera} type={type} ref={(r) => (camera = r)}>
-                    <View style={DiseaseStyle.capture}></View>
-                </Camera>
-                <View style={DiseaseStyle.innerCapature}>
-                    <TouchableOpacity
-                        onPress={__takePicture}
-                        style={DiseaseStyle.takePiectureBtn}
-                    />
-                </View>
-            </React.Fragment>
-        );
-    };
-
     const CameraPreview = ({ photo, retakePicture, savePhoto }) => {
         return (
-            <View style={DiseaseStyle.imgOuterView}>
+            <View style={{ height: '100%' }}>
                 <ImageBackground source={{ uri: photo && photo.uri }} style={DiseaseStyle.img}>
                     <View style={DiseaseStyle.imgView}>
                         <View style={DiseaseStyle.innerMostView}>
                             <TouchableOpacity onPress={retakePicture} style={DiseaseStyle.imgBtn}>
                                 <Text style={DiseaseStyle.imgText}>Re-take</Text>
                             </TouchableOpacity>
-                            <TouchableOpacity onPress={savePhoto} style={DiseaseStyle.imgBtn}>
-                                <Text style={DiseaseStyle.imgText}>save photo</Text>
+                            <TouchableOpacity
+                                style={DiseaseStyle.imgBtn}
+                                onPress={() =>
+                                    navigation.navigate('Result', {
+                                        capturedImage: capturedImage,
+                                    })
+                                }
+                            >
+                                <Text style={DiseaseStyle.imgText}>Submit</Text>
                             </TouchableOpacity>
                         </View>
                     </View>
@@ -91,28 +84,81 @@ const DiseaseScreen = ({ navigation }) => {
             console.log(err);
         }
     };
+    useEffect(() => {
+        __startCamera();
+    });
     return (
-        <View style={DiseaseStyle.container}>
+        <View>
             {hasPermission ? (
                 <View>
                     {capturedImage && previewVisible ? (
                         <CameraPreview
+                            style={{}}
                             photo={capturedImage}
                             savePhoto={__savePhoto}
                             retakePicture={__retakePicture}
                         />
                     ) : (
-                        <Pitcure />
+                        <View>
+                            <View>
+                                <Camera
+                                    style={{ height: '100%', width: '100%' }}
+                                    type={type}
+                                    ref={(r) => (camera = r)}
+                                >
+                                    <View style={DiseaseStyle.capture}></View>
+                                </Camera>
+                            </View>
+                            <View
+                                style={{
+                                    position: 'absolute',
+                                    bottom: 40,
+                                    justifyContent: 'center',
+                                    alignItems: 'center',
+                                }}
+                            >
+                                <TouchableOpacity
+                                    onPress={__takePicture}
+                                    style={{
+                                        width: 100,
+                                        height: 100,
+                                        borderRadius: 50,
+                                        backgroundColor: '#fff',
+                                        alignItems: 'center',
+                                        left: '110%',
+                                    }}
+                                >
+                                    <IconButton
+                                        icon="camera"
+                                        color="#49c1a4"
+                                        size={40}
+                                        style={{ marginTop: 23, paddingLeft: 3 }}
+                                    />
+                                </TouchableOpacity>
+                            </View>
+                        </View>
                     )}
                 </View>
             ) : (
-                <View>
-                    <TouchableOpacity onPress={__startCamera} style={DiseaseStyle.takePiecture}>
-                        <Text style={DiseaseStyle.text}>Take picture</Text>
+                <View style={{ justifyContent: 'center', padding: 20 }}>
+                    <TouchableOpacity
+                        style={{
+                            shadowColor: '#000',
+                            shadowOffset: { width: 0, height: 1 },
+                            shadowOpacity: 0.8,
+                            shadowRadius: 2,
+                            elevation: 5,
+                            backgroundColor: '#FFF',
+                            padding: 20,
+
+                            alignItems: 'center',
+                        }}
+                    >
+                        <Text style={{}}>Permission Denied</Text>
                     </TouchableOpacity>
                 </View>
             )}
-            <View
+            {/* <View
                 style={{
                     flex: 0,
                 }}
@@ -128,7 +174,7 @@ const DiseaseScreen = ({ navigation }) => {
                 >
                     <Text style={DiseaseStyle.text}>Submit</Text>
                 </TouchableOpacity>
-            </View>
+            </View> */}
         </View>
     );
 };

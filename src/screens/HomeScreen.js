@@ -29,71 +29,73 @@ const HomeScreen = ({ navigation }) => {
         // console.log(data.data.message);
     };
     return (
-        <ScrollView>
-            <Navbar drawerShow={drawerShow} />
-
-            {showDrawer ? (
-                <View>
-                    <Drawer navigation={navigation} />
-                </View>
-            ) : (
-                <View>
-                    <Text></Text>
-                </View>
-            )}
-
-            {productsList.map((value, index) => (
-                <View
-                    style={{
-                        display: 'flex',
-                        justifyContent: 'space-between',
-                        flexDirection: 'row',
-                        backgroundColor: '#88888817',
-                        marginBottom: 10,
-                        marginTop: 10,
-                        marginLeft: 5,
-                        marginRight: 5,
-                        height: 60,
-                        borderRadius: 50,
-                    }}
-                    key={value + index}
-                >
+        <>
+            <>
+                <Navbar drawerShow={drawerShow} />
+                {showDrawer ? (
+                    <View>
+                        <Drawer navigation={navigation} />
+                    </View>
+                ) : (
+                    <View>
+                        <Text></Text>
+                    </View>
+                )}
+            </>
+            <ScrollView>
+                {productsList.map((value, index) => (
                     <View
                         style={{
-                            flex: 1,
+                            display: 'flex',
+                            justifyContent: 'space-between',
+                            flexDirection: 'row',
+                            backgroundColor: '#88888817',
+                            marginBottom: 10,
                             marginTop: 10,
-                            marginBottom: 50,
-                            width: '100%',
+                            marginLeft: 5,
+                            marginRight: 5,
+                            height: 60,
+                            borderRadius: 50,
                         }}
-                        // key={value}
+                        key={value + index}
                     >
-                        <Image
-                            style={styles.image}
-                            source={{
-                                uri: `http://wccl.erp.bt${value.crop_image}`,
+                        <View
+                            style={{
+                                flex: 1,
+                                marginTop: 10,
+                                marginBottom: 50,
+                                width: '100%',
                             }}
-                        />
+                            // key={value}
+                        >
+                            <Image
+                                style={styles.image}
+                                source={{
+                                    uri: `http://wccl.erp.bt${value.crop_image}`,
+                                }}
+                            />
+                        </View>
+                        <View style={{ flex: 1, paddingTop: 23, marginLeft: 20 }}>
+                            <Text>Nu. {value.avg_rate}</Text>
+                        </View>
+                        <View style={{ flex: 1, paddingTop: 23, marginLeft: 20 }}>
+                            <Text>{value.crop}</Text>
+                        </View>
+                        <TouchableOpacity>
+                            <IconButton
+                                icon="arrow-right-circle"
+                                color="#49c1a3"
+                                size={30}
+                                style={{ paddingTop: 5 }}
+                                onPress={() =>
+                                    navigation.navigate('Product', { crop_name: value.crop })
+                                }
+                            />
+                        </TouchableOpacity>
                     </View>
-                    <View style={{ flex: 1, paddingTop: 23, marginLeft: 20 }}>
-                        <Text>Nu. {value.avg_rate}</Text>
-                    </View>
-                    <View style={{ flex: 1, paddingTop: 23, marginLeft: 20 }}>
-                        <Text>{value.crop}</Text>
-                    </View>
-                    <TouchableOpacity>
-                        <IconButton
-                            icon="arrow-right-circle"
-                            color="#49c1a3"
-                            size={30}
-                            style={{ paddingTop: 5 }}
-                            onPress={() =>
-                                navigation.navigate('Product', { crop_name: value.crop })
-                            }
-                        />
-                    </TouchableOpacity>
-                </View>
-            ))}
-        </ScrollView>
+                ))}
+            </ScrollView>
+        </>
     );
 };
 

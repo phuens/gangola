@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, TextInput, ScrollView, View, Picker, Alert, Image, Text, Button, TouchableOpacity } from "react-native";
+import { Platform, StyleSheet, TextInput, ScrollView, View, Alert, Picker, Image, Text, Button, TouchableOpacity } from "react-native";
 // import LogIn from 'LogInScreen';
-import axios from 'axios'
+import axios from 'axios';
 import * as ImagePicker from 'expo-image-picker';
 import { LinearGradient } from 'expo-linear-gradient';
+import { IconButton } from 'react-native-paper';
+
 
 const RegisterScreen = ({ navigation }) => {
   const[name, setName] = useState("");
@@ -24,7 +26,9 @@ const RegisterScreen = ({ navigation }) => {
   useEffect( ()=>{
     getDzongkhagList(); 
   },[]);
-
+  function printGlobal(){
+    console.log(phone)
+  }
   const pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,
@@ -48,12 +52,17 @@ const RegisterScreen = ({ navigation }) => {
     }
   }
   const getGewogs = async (v)=>{
-    data = await axios.get(" http://wccl.erp.bt/api/method/gangola.api.get_gewogs",{params:{dzongkhag:v}})
+    data = await axios.get(`http://wccl.erp.bt/api/method/gangola.api.get_gewogs?dzongkhag=${v}`)
     setGewogList(data.data.message)
     setVillage("")
   }
   const getVillages = async (v)=>{
-    data = await axios.get("http://wccl.erp.bt/api/method/gangola.api.get_villages",{params:{dzongkhag:dzongkhag, gewog:v}})
+    if(Platform.OS === 'ios'){
+      data = await axios.get(`http://wccl.erp.bt/api/method/gangola.api.get_villages?dzongkhag=${dzongkhag}&gewog=${v}`)
+    }
+    else{
+      data = await axios.get("http://wccl.erp.bt/api/method/gangola.api.get_villages",{params:{dzongkhag:dzongkhag, gewog:v}})
+    }
     setVillageList(data.data.message)
   }
   const registerUser = async (n, pN, d, g, v)=>{
@@ -63,13 +72,20 @@ const RegisterScreen = ({ navigation }) => {
     if (!pN.trim()){
       return Alert.alert('Missing Field','Phone Number is mandatory.');
     }
-    if (!d.trim()){
-      return Alert.alert('Missing Field','Dzongkhag is mandatory.');
+    function sendPhoneNumberValue(value) {
+        setNumber(value);
     }
     if (!g.trim()){
       return Alert.alert('Missing Field','Gewog is mandatory.');
     }
-    response = await axiox.post("", {params: {name:name, pN:phoneNumber, d:dzongkhag, g:gewog, v:village}})
+    response = await axios.post(`http://wccl.erp.bt/api/method/gangola.api.registration?name=${n}&phoneNumber=${pN}&dzongkhag=${d}&gewog=${g}&village=${v}`)
+    if(response.data.message.error === ""){
+      navigation.navigate('LogIn');
+      return Alert.alert('Sucess','User is successfully registered.')
+    }
+    else{
+      return Alert.alert('Error',response.data.message.error);
+    }  
   }
   return (
     <LinearGradient 
@@ -79,16 +95,19 @@ const RegisterScreen = ({ navigation }) => {
       y: 0
     }}
     end={{
-      x: 1,
+      x: 2,
       y: 3
     }}>
    <ScrollView style={{padding:10}}>
-
+    <View style={{alignSelf:"center"}}>
+                <IconButton icon="account-plus" color="#49c1a4" size={100} onPress={() => drawerShow()} />
+    </View>
      <TextInput onChangeText = {sendNameValue} placeholder={"Name"} style={styles.inputText} value={name}></TextInput>
      <TextInput onChangeText={sendPhoneNumberValue} placeholder={"Phone Number"} style={styles.inputText} value={phoneNumber} keyboardType='numeric'></TextInput>
      <View style={styles.picker}>    
      <Picker
                     mode="dropdown"
+                    itemStyle={{height:50}}
                     selectedValue={dzongkhag}
                     onValueChange={val => {getGewogs(val), setDzongkhag(val)}}>
                     <Picker.Item
@@ -112,6 +131,7 @@ const RegisterScreen = ({ navigation }) => {
       <Picker
                     mode="dropdown"
                     selectedValue={gewog}
+                    itemStyle={{height:50}}
                     onValueChange={val => {setGewog(val), getVillages(val)}}>
                     <Picker.Item
                       label={'Select Gewog'}
@@ -134,6 +154,7 @@ const RegisterScreen = ({ navigation }) => {
       <Picker
                     mode="dropdown"
                     selectedValue={village}
+                    itemStyle={{height:50}}
                     onValueChange={setVillage}
                     >
                     <Picker.Item
@@ -153,16 +174,21 @@ const RegisterScreen = ({ navigation }) => {
                     })}
       </Picker>
   </View>
-  <TouchableOpacity onPress={pickImage}>
+  {/* <TouchableOpacity onPress={pickImage}>
     <View style={styles.button}>
     <Text style={{ color: '#49c1a4', }}>Pick Profile Picture</Text>
     </View>
-  </TouchableOpacity>
+  </TouchableOpacity> */}
   <TouchableOpacity  onPress={() => registerUser(name, phoneNumber, dzongkhag, gewog, village)}>
     <View style={styles.button}>
     <Text style={{ color: '#49c1a4', }}>Register</Text>
     </View>
   </TouchableOpacity>
+  {/* <TouchableOpacity  onPress={printGlobal}>
+    <View style={styles.button}>
+    <Text style={{ color: '#49c1a4', }}>print</Text>
+    </View>
+  </TouchableOpacity> */}
       <View>{image && <Image source={{ uri: image }} style={styles.image} />}</View>
       <Text style={styles.text} onPress={() => navigation.navigate('LogIn')}>Already Have An Account? Log In</Text>
    </ScrollView> 
@@ -186,7 +212,7 @@ const styles = StyleSheet.create({
     marginLeft: 5,
     marginRight: 5,
     marginTop: 15,
-    marginBottom:'55%',
+    marginBottom:'30%',
     textAlign: "center"
   },
   button: {
@@ -211,7 +237,8 @@ const styles = StyleSheet.create({
     marginRight: 5,
     marginTop: 15,
     padding:10,
-    borderRadius: 30
+    borderRadius: 30,
+    textAlign: "center"
 
   },
   image: {

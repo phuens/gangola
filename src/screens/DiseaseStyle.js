@@ -1,49 +1,57 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet } from 'react-native';
 
 const DiseaseStyle = StyleSheet.create({
-    imgOuterView:{
+    imgOuterView: {
         backgroundColor: 'transparent',
         flex: 1,
         width: '80%',
         height: 300,
-        top:0
-      },
-    imgView:{
+        top: 0,
+    },
+    imgView: {
         flex: 1,
         flexDirection: 'column',
         padding: 15,
-        justifyContent: 'flex-end'
-      },
-    imgBtn:{
+        justifyContent: 'flex-end',
+    },
+    imgBtn: {
         width: 130,
         height: 40,
         alignItems: 'center',
-        borderRadius: 4
+        backgroundColor: '#ffffff',
+        borderRadius: 30,
+        shadowColor: '#000',
+        shadowOffset: { width: 1, height: 1 },
+        shadowOpacity: 0.8,
+        shadowRadius: 2,
+        elevation: 10,
     },
-    imgText:{
-        color: '#fff',
-        fontSize: 20
+
+    imgText: {
+        color: 'black',
+        fontSize: 17,
+        paddingTop: 10,
     },
-    img:{
-        flex: 1
+    img: {
+        flex: 1,
     },
-    innerMostView:{
+    innerMostView: {
         flexDirection: 'row',
-        justifyContent: 'space-between'
+        justifyContent: 'space-between',
     },
-    takePiectureBtn:{
+    takePiectureBtn: {
         width: 70,
         height: 70,
         bottom: 0,
         borderRadius: 50,
-        backgroundColor: '#fff'
-        },
-    innerCapature:{
+        backgroundColor: '#fff',
+    },
+    innerCapature: {
         alignSelf: 'center',
         flex: 1,
         alignItems: 'center',
     },
-    capture:{
+    capture: {
         // position: 'absolute',
         bottom: 0,
         flexDirection: 'row',
@@ -51,29 +59,29 @@ const DiseaseStyle = StyleSheet.create({
         width: '100%',
         padding: 20,
         height: 500,
-        justifyContent: 'space-between'
+        justifyContent: 'space-between',
     },
     container: {
         flex: 1,
         position: 'absolute',
-        height:300,
+        height: 300,
         flexDirection: 'row',
         width: 500,
         // padding: 20,
         justifyContent: 'center',
-        height:'80%',
-        alignItems: 'center'
+        height: '80%',
+        alignItems: 'center',
     },
     camera: {
         flex: 1,
         width: '100%',
-        height:600,
+        height: 600,
         // position:'absolute',
         borderRadius: 4,
         backgroundColor: '#14274e',
         flexDirection: 'row',
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
     },
     buttonContainer: {
         flex: 1,
@@ -89,18 +97,17 @@ const DiseaseStyle = StyleSheet.create({
         fontSize: 18,
         color: '#fff',
         fontWeight: 'bold',
-        textAlign: 'center'
+        textAlign: 'center',
     },
-    takePiecture:{
+    takePiecture: {
         width: 130,
         borderRadius: 4,
         backgroundColor: '#14274e',
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
-        height: 40
-    }
-})
+        height: 40,
+    },
+});
 
-
-export default DiseaseStyle
+export default DiseaseStyle;

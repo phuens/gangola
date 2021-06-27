@@ -49,6 +49,11 @@ const App = () => {
                     component={WeatherScreen}
                     options={{ title: 'Weather' }}
                 />
+                <Stack.Screen
+                    name="Sell"
+                    component={SellScreen}
+                    options={{ title: 'Sell' }}
+                />
             </Stack.Navigator>
         </NavigationContainer>
     );

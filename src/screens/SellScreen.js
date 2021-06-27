@@ -15,9 +15,8 @@ const SellScreen = ()=>{
         getData()
     },[])
     const getData= async()=>{
-        let date = '2021-06-26';
         if ( !loaded){
-            let data = await axios.get('http://wccl.erp.bt/api/method/gangola.api.get_farmer_crops?farmer=17123456')
+            let data = await axios.get(`http://wccl.erp.bt/api/method/gangola.api.get_farmer_crops?farmer=${global.phone}`)
             if (data.data.message){
                 setProductsList(data.data.message);
                 setLoaded(true)
@@ -33,7 +32,7 @@ const SellScreen = ()=>{
     }
     const updateCrop =async ()=>{
        let res = await axios.post('http://wccl.erp.bt/api/method/gangola.api.update_rate',{
-        "farmer":"17123456",
+        "farmer":global.phone,
         "crops":[
             {"crop":productsList[indx].crop,"quantity":quantity,"rate":rate}
         ]
@@ -44,7 +43,7 @@ const SellScreen = ()=>{
         Alert.alert('Your Data Updated')        
     }
     const list = []
-    if(productsList){
+    if(productsList.length > 0 ){
         for (let i = 0; i< productsList.length; i += 2){
             if ( i < productsList.length){
                 list.push(<View style={Styles.secInnerView} key={'key1'+i}>

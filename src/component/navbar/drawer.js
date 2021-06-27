@@ -22,12 +22,7 @@ const Drawer = ({ navigation }) => {
                     style={{ flexDirection: 'row' }}
                     onPress={() => navigation.navigate('Register')}
                 >
-                    <IconButton
-                        icon="storefront"
-                        color="#0275d8"
-                        size={20}
-                        onPress={() => drawerShow()}
-                    />
+                    <IconButton icon="storefront" color="#0275d8" size={20} />
                     <Text style={styles.touch_button}>Sell</Text>
                 </TouchableOpacity>
             </View>
@@ -39,12 +34,7 @@ const Drawer = ({ navigation }) => {
                     style={{ flexDirection: 'row' }}
                     onPress={() => navigation.navigate('Disease')}
                 >
-                    <IconButton
-                        icon="leaf"
-                        color="#0275d8"
-                        size={20}
-                        onPress={() => drawerShow()}
-                    />
+                    <IconButton icon="leaf" color="#0275d8" size={20} />
                     <Text style={styles.touch_button}>Crop+</Text>
                 </TouchableOpacity>
             </View>
@@ -54,14 +44,9 @@ const Drawer = ({ navigation }) => {
             <View style={styles.sub_menu}>
                 <TouchableOpacity
                     style={{ flexDirection: 'row' }}
-                    onPress={() => navigation.navigate('Disease')}
+                    onPress={() => navigation.navigate('Dashboard')}
                 >
-                    <IconButton
-                        icon="chart-bar"
-                        color="#0275d8"
-                        size={20}
-                        onPress={() => drawerShow()}
-                    />
+                    <IconButton icon="chart-bar" color="#0275d8" size={20} />
                     <Text style={styles.touch_button}>Dashboard</Text>
                 </TouchableOpacity>
             </View>
@@ -71,14 +56,9 @@ const Drawer = ({ navigation }) => {
             <View style={styles.sub_menu}>
                 <TouchableOpacity
                     style={{ flexDirection: 'row' }}
-                    onPress={() => navigation.navigate('Register')}
+                    onPress={() => navigation.navigate('Weather')}
                 >
-                    <IconButton
-                        icon="weather-partly-cloudy"
-                        color="#0275d8"
-                        size={20}
-                        onPress={() => drawerShow()}
-                    />
+                    <IconButton icon="weather-partly-cloudy" color="#0275d8" size={20} />
                     <Text style={styles.touch_button}>Weather</Text>
                 </TouchableOpacity>
             </View>

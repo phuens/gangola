@@ -182,7 +182,7 @@ const Drawer = ({ navigation }) => {
                 <View style={styles.sub_menu}>
                     <TouchableOpacity
                         style={{ flexDirection: 'row' }}
-                        onPress={() => navigation.navigate('Disease')}
+                        onPress={() => navigation.navigate('Dashboard')}
                     >
                         <IconButton
                             icon="chart-bar"
@@ -204,7 +204,7 @@ const Drawer = ({ navigation }) => {
                 <View style={styles.sub_menu}>
                     <TouchableOpacity
                         style={{ flexDirection: 'row' }}
-                        onPress={() => navigation.navigate('Register')}
+                        onPress={() => navigation.navigate('Weather')}
                     >
                         <IconButton
                             icon="weather-partly-cloudy"

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Platform, StyleSheet, TextInput, ScrollView, View, Alert, Picker, Image, Text, Button, TouchableOpacity } from "react-native";
 // import LogIn from 'LogInScreen';
-import axios from 'axios'
+import axios from 'axios';
 import * as ImagePicker from 'expo-image-picker';
 import { LinearGradient } from 'expo-linear-gradient';
 import { IconButton } from 'react-native-paper';
@@ -72,8 +72,8 @@ const RegisterScreen = ({ navigation }) => {
     if (!pN.trim()){
       return Alert.alert('Missing Field','Phone Number is mandatory.');
     }
-    if (!d.trim()){
-      return Alert.alert('Missing Field','Dzongkhag is mandatory.');
+    function sendPhoneNumberValue(value) {
+        setNumber(value);
     }
     if (!g.trim()){
       return Alert.alert('Missing Field','Gewog is mandatory.');

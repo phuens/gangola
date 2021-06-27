@@ -20,13 +20,13 @@ const HomeScreen = ({ navigation }) => {
     }, []);
 
     const getDate = async () => {
-        console.log('righ before call');
+        // console.log('righ before call');
         let date = '2021-06-26';
         let data = await axios.get('http://wccl.erp.bt/api/method/gangola.api.get_crops', {
             params: { as_on_date: '' },
         });
         setProductsList(data.data.message);
-        console.log(data.data.message);
+        // console.log(data.data.message);
     };
     return (
         <ScrollView>

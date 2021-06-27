@@ -4,11 +4,10 @@ import HomeScreen from './src/screens/HomeScreen';
 import DiseaseScreen from './src/screens/DiseaseScreen';
 import RegisterScreen from './src/screens/RegisterScreen';
 import LogInScreen from './src/screens/LogInScreen';
-// import AccountScreen from './src/screens/AccountScreen';
-// import HistoryScreen from './src/screens/HistoryScreen';
 import ProductScreen from './src/screens/ProductScreen';
 import { createStackNavigator } from '@react-navigation/stack';
 import ResultScreen from './src/screens/ResultScreen';
+import SellScreen from './src/screens/SellScreen';
 
 const Stack = createStackNavigator();
 
@@ -41,6 +40,11 @@ const App = () => {
                     name="Result"
                     component={ResultScreen}
                     options={{ title: 'Result' }}
+                />
+                 <Stack.Screen
+                    name="SellScreen"
+                    component={SellScreen}
+                    options={{ title: 'Sell Screen' }}
                 />
             </Stack.Navigator>
         </NavigationContainer>

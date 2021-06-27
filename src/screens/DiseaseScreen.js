@@ -15,6 +15,7 @@ const DiseaseScreen = ({ navigation }) => {
     const [previewVisible, setPreviewVisible] = useState(false);
     const [capturedImage, setCapturedImage] = useState('');
     const [type, setType] = useState(Camera.Constants.Type.back);
+    const [base64,setBase64] = useState('')
     let camera = '';
 
     const getSiteDocuments = async () => {
@@ -65,17 +66,13 @@ const DiseaseScreen = ({ navigation }) => {
     const __takePicture = async () => {
         try {
             if (!camera) return;
+            // console.log(camera)
             const photo = await camera.takePictureAsync({
-                includeBase64: true,
-                isCamera: true,
-                forceJpg: true,
-                compressQuality: 50,
-                width: 300,
-                height: 300,
-                minCompressSize: 8000, //6 MB
-                title: 'image',
+                base64: true,
+                quality:1,
+                allowsEditing:true
             });
-            console.log(photo);
+            setBase64(photo.base64)
             setPreviewVisible(true);
             setCapturedImage(photo);
         } catch (err) {
@@ -124,6 +121,7 @@ const DiseaseScreen = ({ navigation }) => {
                     onPress={() =>
                         navigation.navigate('Result', {
                             capturedImage: capturedImage,
+                            base64:base64
                         })
                     }
                     style={DiseaseStyle.takePiecture}

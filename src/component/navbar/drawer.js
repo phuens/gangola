@@ -85,6 +85,23 @@ const Drawer = ({ navigation }) => {
             <View
                 style={{ width: '100%', height: 2, backgroundColor: '#f7f7f1', marginBottom: 20 }}
             />
+            <View style={styles.sub_menu}>
+                <TouchableOpacity
+                    style={{ flexDirection: 'row' }}
+                    onPress={() => navigation.navigate('SellScreen')}
+                >
+                    <IconButton
+                        icon="weather-partly-cloudy"
+                        color="#0275d8"
+                        size={20}
+                        onPress={() => drawerShow()}
+                    />
+                    <Text style={styles.touch_button}>Sell Screen</Text>
+                </TouchableOpacity>
+            </View>
+            <View
+                style={{ width: '100%', height: 2, backgroundColor: '#f7f7f1', marginBottom: 20 }}
+            />
         </View>
     );
 };

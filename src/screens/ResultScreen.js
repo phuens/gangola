@@ -9,17 +9,36 @@ const ResultScreen = ({route})=>{
        PostDisease()
     },[])
     const PostDisease =  async()=>{
-        // console.log(route.params.capturedImage)
-        fileName = route.params.capturedImage.uri.substring(route.params.capturedImage.uri.lastIndexOf('/')+1)
-        const data = new FormData()
-        // data.append('farmer','111223342313')
+
+        // console.log('hklds ',route.params.base64)
+        let fileName = route.params.capturedImage.uri.substring(route.params.capturedImage.uri.lastIndexOf('/')+1)
+        // const data = new FormData()
+        // data.append('farmer','17123456')
         // data.append('crop','Onions')
         // data.append('crop_image',fileName)
         // const headers= {
         //     'Content-Type': 'multipart/form-data'
         //   }
-        let res = await axios.post('http://wccl.erp.bt/api/method/gangola.api.submit_image?farmer=111223342313&crop=Onions')
-        console.log('hello world ',res)
+        //   console.log('hello world ',data)
+        let file_form = new FormData();
+            file_form.append('farmer','17123456');
+            file_form.append('crop','Onions');
+            file_form.append('crop_image', fileName);
+        console.log('value ',file_form)
+        let resp = axios.post(`http://wccl.erp.bt/api/method/gangola.api.submit_image`,{data:file_form},{headers: {'Content-Type': 'multipart/form-data'}})
+        console.log('response ',resp)
+        // let body = {
+        //     "farmer":"17123456",
+        //     "crop":"Onions"
+        // }
+        // let headers = {
+        //     'Content-Type':'application/json',
+        //     'Authorization':'token d828391ea0ececb:72d0e5fec989202'
+        // }
+        // let res = await axios.put(`http://wccl.erp.bt/api/resource/Crop Disease Report`,{
+        //     data:body
+        // },
+        // {headers})
     }
         return (
         <Card>

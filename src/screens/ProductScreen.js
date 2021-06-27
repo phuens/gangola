@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { Text, StyleSheet, TextInput, View, Button, Collapsible, TouchableOpacity, Picker } from 'react-native';
+import { Text, StyleSheet, TextInput, View, Button, Collapsible, TouchableOpacity, Picker, LogBox, YellowBox} from 'react-native';
 // import { Picker } from '@react-native-picker/picker';
 // import DatePicker from 'react-native-date-picker';
 import axios from 'axios';
 import { ScrollView } from 'react-native-gesture-handler';
+LogBox.ignoreAllLogs = ["Warning: Each", "Warning: Failed"];
+YellowBox.ignoreWarnings([""]);
 
 const RegisterScreen = ({ route, navigation }) => {
     const [date, setDate] = useState(new Date());
